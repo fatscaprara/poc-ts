@@ -14,5 +14,5 @@ export async function postBook(req: Request, res: Response) {
 
   await bookServices.postBook(book);
 
-  res.sendStatus(201);
+  res.sendStatus(httpStatus.CREATED);
 }
