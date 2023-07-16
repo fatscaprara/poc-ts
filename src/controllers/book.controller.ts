@@ -16,3 +16,9 @@ export async function postBook(req: Request, res: Response) {
 
   res.sendStatus(httpStatus.CREATED);
 }
+
+export async function getBooks(req: Request, res: Response) {
+  const books = await bookServices.getBooks();
+
+  res.send(books);
+}

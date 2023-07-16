@@ -13,3 +13,13 @@ export function insertBook({ name, description }: BookBody) {
     [name, description]
   );
 }
+
+export function getAllBooks() {
+  return db.query(`
+    SELECT
+      *
+    FROM
+      books
+    ;
+  `);
+}
