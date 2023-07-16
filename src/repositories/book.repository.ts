@@ -23,3 +23,31 @@ export function getAllBooks() {
     ;
   `);
 }
+
+export function getBookByIdDB(id: number) {
+  return db.query(
+    `
+    SELECT
+      *
+    FROM
+      books
+    WHERE
+      id = $1
+    ;
+  `,
+    [id]
+  );
+}
+
+export function deleteBookByIdDB(id: number) {
+  return db.query(
+    `
+    DELETE FROM
+      books
+    WHERE
+      id = $1
+    ;
+  `,
+    [id]
+  );
+}
