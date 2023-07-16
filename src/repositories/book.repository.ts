@@ -20,6 +20,8 @@ export function getAllBooks() {
       *
     FROM
       books
+    ORDER BY
+      id
     ;
   `);
 }
@@ -49,5 +51,21 @@ export function deleteBookByIdDB(id: number) {
     ;
   `,
     [id]
+  );
+}
+
+export function updateBookByIdDB(id: number, { name, description }: BookBody) {
+  return db.query(
+    `
+    UPDATE
+      books
+    SET
+      name = $1,
+      description = $2
+    WHERE
+      id = $3
+    ;
+  `,
+    [name, description, id]
   );
 }

@@ -5,6 +5,7 @@ import {
   getAllBooks,
   getBookByIdDB,
   insertBook,
+  updateBookByIdDB,
 } from "@/repositories/book.repository";
 
 async function postBook(book: BookBody) {
@@ -19,7 +20,7 @@ async function getBooks() {
 
 async function getBookById(id: number) {
   const book = await getBookByIdDB(id);
-  console.log(book);
+
   if (!book.rowCount) {
     throw notFoundError();
   }
@@ -31,9 +32,14 @@ async function deleteBookById(id: number) {
   await deleteBookByIdDB(id);
 }
 
+async function updateBookById(id: number, book: BookBody) {
+  await updateBookByIdDB(id, book);
+}
+
 export default {
   postBook,
   getBooks,
   getBookById,
   deleteBookById,
+  updateBookById,
 };

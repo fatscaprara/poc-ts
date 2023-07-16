@@ -37,3 +37,24 @@ export async function deleteBook(req: Request, res: Response) {
 
   res.sendStatus(httpStatus.NO_CONTENT);
 }
+
+export async function updateBook(req: Request, res: Response) {
+  const { id } = req.params;
+
+  if (isNaN(parseInt(id))) {
+    throw badRequestError();
+  }
+
+  const book = req.body as BookBody;
+  const { error } = bookSchema.validate(book);
+
+  if (error) {
+    throw badRequestError();
+  }
+
+  const bookDB = await bookServices.getBookById(parseInt(id));
+
+  await bookServices.updateBookById(bookDB.id, book);
+
+  res.sendStatus(httpStatus.NO_CONTENT);
+}
